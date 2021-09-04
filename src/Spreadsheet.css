@@ -24,7 +24,7 @@
 
 .Spreadsheet__cell,
 .Spreadsheet__active-cell {
-  cursor: cell;
+  cursor: default;
 }
 
 .Spreadsheet__cell,

@@ -309,13 +309,16 @@ const keyDownHandlers: KeyDownHandlers = {
   ArrowLeft: go(0, -1),
   ArrowRight: go(0, +1),
   Tab: go(0, +1),
-  Enter: edit,
+  Enter: go(+1, 0),
   Backspace: clear,
   Escape: blur,
+  Delete: clear,
 };
 
 const editKeyDownHandlers: KeyDownHandlers = {
   Escape: view,
+  ArrowDown: keyDownHandlers.ArrowDown,
+  ArrowUp: keyDownHandlers.ArrowUp,
   Tab: keyDownHandlers.Tab,
   Enter: keyDownHandlers.ArrowDown,
 };
