@@ -17,6 +17,12 @@ export function moveCursorToEnd(el: HTMLInputElement): void {
   el.selectionStart = el.selectionEnd = el.value.length;
 }
 
+/** Move the cursor of given input element to the input's end */
+export function selectInputValue(el: HTMLInputElement): void {
+  el.selectionStart = 0;
+  el.selectionEnd = el.value.length;
+}
+
 /**
  * Creates an array of numbers (positive and/or negative) progressing from start up to, but not including, end. A step of -1 is used if a negative start is specified without an end or step. If end is not specified, it's set to start with start then set to 0.
  * @param end - an integer number specifying at which position to stop (not included).
@@ -110,16 +116,11 @@ export function getRangeDimensions(
 /** Get the computed value of a cell. */
 export function getComputedValue<Cell extends Types.CellBase<Value>, Value>({
   cell,
-  formulaParser,
 }: {
   cell: Cell | undefined;
-  formulaParser: hotFormulaParser.Parser;
 }): Value | FormulaParseResult | FormulaParseError | null {
   if (cell === undefined) {
     return null;
-  }
-  if (isFormulaCell(cell)) {
-    return getFormulaComputedValue({ cell, formulaParser });
   }
   return cell.value;
 }

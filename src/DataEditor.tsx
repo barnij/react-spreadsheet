@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Types from "./types";
-import { moveCursorToEnd } from "./util";
+import { selectInputValue } from "./util";
 
 type Value = string | number;
 
@@ -24,7 +24,7 @@ const DataEditor: React.FC<Types.DataEditorProps<Cell>> = ({
 
   React.useEffect(() => {
     if (inputRef.current) {
-      moveCursorToEnd(inputRef.current);
+      selectInputValue(inputRef.current);
     }
   }, [inputRef]);
 
