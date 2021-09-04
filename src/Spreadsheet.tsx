@@ -395,7 +395,6 @@ const Spreadsheet = <CellType extends Types.CellBase>(
         const cell = Matrix.get(point, store.getState().data);
         value = getComputedValue<CellType, CellType["value"]>({
           cell,
-          formulaParser: formulaParser,
         });
       } catch (error) {
         console.error(error);
@@ -417,7 +416,6 @@ const Spreadsheet = <CellType extends Types.CellBase>(
         (cell) =>
           getComputedValue<CellType, CellType["value"]>({
             cell,
-            formulaParser: formulaParser,
           })
       );
 
