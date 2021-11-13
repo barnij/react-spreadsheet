@@ -17,7 +17,8 @@ import DefaultRowIndicator from "./RowIndicator";
 import { Cell as DefaultCell, enhance as enhanceCell } from "./Cell";
 // import DefaultDataViewer from "./DataViewer";
 import { DataViewerRaw } from "./DataViewer";
-import DefaultDataEditor from "./DataEditor";
+// import DefaultDataEditor from "./DataEditor";
+import { DataEditorAutocomplete } from "./DataEditor";
 import ActiveCell from "./ActiveCell";
 import Selected from "./Selected";
 import Copied from "./Copied";
@@ -133,7 +134,7 @@ const Spreadsheet = <CellType extends Types.CellBase>(
     Row = DefaultRow,
     HeaderRow = DefaultHeaderRow,
     CornerIndicator = DefaultCornerIndicator,
-    DataEditor = DefaultDataEditor,
+    DataEditor = DataEditorAutocomplete,
     DataViewer = DataViewerRaw,
     getBindingsForCell = defaultGetBindingsForCell,
     RowIndicator = DefaultRowIndicator,
