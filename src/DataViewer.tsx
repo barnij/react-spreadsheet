@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Types from "./types";
-import { getComputedValue } from "./util";
+import { getComputedValue, getValue } from "./util";
 
 export const TRUE_TEXT = "TRUE";
 export const FALSE_TEXT = "FALSE";
@@ -18,6 +18,15 @@ const DataViewer = <Cell extends Types.CellBase<Value>, Value>({
   ) : (
     <span className="Spreadsheet__data-viewer">{value}</span>
   );
+};
+
+/** The Spreadsheet DataViewer component */
+export const DataViewerRaw = <Cell extends Types.CellBase<Value>, Value>({
+  cell,
+  formulaParser,
+}: Types.DataViewerProps<Cell>): React.ReactElement => {
+  const value = getValue<Cell, Value>({ cell, formulaParser });
+  return <span className="Spreadsheet__data-viewer">{value}</span>;
 };
 
 export default DataViewer;

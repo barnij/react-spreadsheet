@@ -141,6 +141,19 @@ export function getComputedValue<Cell extends Types.CellBase<Value>, Value>({
   return cell.value;
 }
 
+/** Just get value of a cell. */
+export function getValue<Cell extends Types.CellBase<Value>, Value>({
+  cell,
+}: {
+  cell: Cell | undefined;
+  formulaParser: hotFormulaParser.Parser;
+}): Value | FormulaParseResult | FormulaParseError | null {
+  if (cell === undefined) {
+    return null;
+  }
+  return cell.value;
+}
+
 /** Get the computed value of a formula cell */
 export function getFormulaComputedValue({
   cell,
