@@ -320,7 +320,7 @@ const editKeyDownHandlers: KeyDownHandlers = {
   ArrowDown: keyDownHandlers.ArrowDown,
   ArrowUp: keyDownHandlers.ArrowUp,
   Tab: keyDownHandlers.Tab,
-  Enter: keyDownHandlers.ArrowDown,
+  Enter: view,
 };
 
 const editShiftKeyDownHandlers: KeyDownHandlers = {

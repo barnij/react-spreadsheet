@@ -8,6 +8,8 @@ type Cell = Types.CellBase<Value>;
 
 /** The default Spreadsheet DataEditor component */
 const DataEditor: React.FC<Types.DataEditorProps<Cell>> = ({
+  row,
+  column,
   onChange,
   cell = {
     value: "",
