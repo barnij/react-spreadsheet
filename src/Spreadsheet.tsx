@@ -373,12 +373,12 @@ const Spreadsheet = <CellType extends Types.CellBase>(
   }, [props.Cell]);
 
   React.useEffect(() => {
-    document.addEventListener("cut", handleCut);
+    // document.addEventListener("cut", handleCut);
     document.addEventListener("copy", handleCopy);
     document.addEventListener("paste", handlePaste);
 
     return () => {
-      document.removeEventListener("cut", handleCut);
+      // document.removeEventListener("cut", handleCut);
       document.removeEventListener("copy", handleCopy);
       document.removeEventListener("paste", handlePaste);
     };
