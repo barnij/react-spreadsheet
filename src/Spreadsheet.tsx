@@ -15,7 +15,8 @@ import DefaultCornerIndicator from "./CornerIndicator";
 import DefaultColumnIndicator from "./ColumnIndicator";
 import DefaultRowIndicator from "./RowIndicator";
 import { Cell as DefaultCell, enhance as enhanceCell } from "./Cell";
-import DefaultDataViewer from "./DataViewer";
+// import DefaultDataViewer from "./DataViewer";
+import { DataViewerRaw } from "./DataViewer";
 import DefaultDataEditor from "./DataEditor";
 import ActiveCell from "./ActiveCell";
 import Selected from "./Selected";
@@ -133,7 +134,7 @@ const Spreadsheet = <CellType extends Types.CellBase>(
     HeaderRow = DefaultHeaderRow,
     CornerIndicator = DefaultCornerIndicator,
     DataEditor = DefaultDataEditor,
-    DataViewer = DefaultDataViewer,
+    DataViewer = DataViewerRaw,
     getBindingsForCell = defaultGetBindingsForCell,
     RowIndicator = DefaultRowIndicator,
     ColumnIndicator = DefaultColumnIndicator,
