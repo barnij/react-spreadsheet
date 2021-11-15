@@ -1,5 +1,4 @@
-import { TextField } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
+import { Autocomplete, TextField } from "@mui/material";
 import * as React from "react";
 import * as Types from "./types";
 import { moveCursorToEnd, selectInputValue } from "./util";
@@ -36,13 +35,27 @@ const DataEditor: React.FC<Types.DataEditorProps> = ({ onChange, cell }) => {
   );
 };
 
-const INSTRUCTIONS = ["add", "sub", "mult"];
+const INSTRUCTIONS = [
+  "load",
+  "store",
+  "add",
+  "sub",
+  "mult",
+  "div",
+  "read",
+  "write",
+  "jump",
+  "jgtz",
+  "jzero",
+  "halt",
+].sort();
 
-/** The default Spreadsheet DataEditor component */
+/** The Spreadsheet DataEditor component with Autocomplete */
 export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
   column,
   onChange,
   cell,
+  autocompleteList,
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -61,40 +74,38 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
 
   const value = cell?.value ?? "";
 
-  if (column === 0) {
-    return (
-      <div className="Spreadsheet__data-editor">
-        <input list="commands" autoFocus type="text" onChange={handleChange} />
-        <datalist id="commands">
-          <option value="add" />
-          <option value="sub" />
-        </datalist>
-      </div>
-    );
-  }
+  const autocomplete = (options: string[]) => (
+    <div className="Spreadsheet__data-editor">
+      <Autocomplete
+        options={options}
+        getOptionLabel={(option) => option}
+        autoHighlight
+        includeInputInList
+        autoSelect
+        autoComplete
+        onChange={(event, value) => onChange({ ...cell, value: value })}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            autoFocus
+            onChange={handleChange}
+            variant="standard"
+            margin="none"
+            fullWidth
+          />
+        )}
+      />
+    </div>
+  );
 
-  if (column === 1) {
-    return (
-      <div className="Spreadsheet__data-editor">
-        <Autocomplete
-          options={INSTRUCTIONS}
-          getOptionLabel={(option) => option}
-          autoHighlight
-          onChange={(event, value) =>
-            onChange({ ...cell, value: value ? value : "" })
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              autoFocus
-              variant="standard"
-              margin="none"
-              fullWidth
-            />
-          )}
-        />
-      </div>
-    );
+  const INSTRUCTION_COL = 1;
+  const ARGUMENT_COL = 2;
+
+  if (column === INSTRUCTION_COL) {
+    return autocomplete(INSTRUCTIONS);
+  }
+  if (column === ARGUMENT_COL) {
+    return autocomplete(autocompleteList ?? []);
   }
 
   return (

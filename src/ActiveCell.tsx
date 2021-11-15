@@ -10,12 +10,14 @@ import { getCellDimensions } from "./util";
 
 type Props = {
   DataEditor: Types.DataEditorComponent;
+  valuesFromFirstColumn?: string[];
   getBindingsForCell: Types.GetBindingsForCell<Types.CellBase>;
 };
 
 const ActiveCell: React.FC<Props> = (props) => {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const { getBindingsForCell } = props;
+  const valuesFromFirstColumn = props.valuesFromFirstColumn ?? [];
 
   const dispatch = useDispatch();
   const setCellData = React.useCallback(
@@ -123,6 +125,7 @@ const ActiveCell: React.FC<Props> = (props) => {
           row={active.row}
           column={active.column}
           cell={cell}
+          autocompleteList={valuesFromFirstColumn}
           // @ts-ignore
           onChange={handleChange}
           exitEditMode={view}
