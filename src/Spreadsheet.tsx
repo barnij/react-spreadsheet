@@ -475,11 +475,14 @@ const Spreadsheet = <CellType extends Types.CellBase>(
       <ActiveCell
         // @ts-ignore
         DataEditor={DataEditor}
+        valuesFromFirstColumn={props.data
+          .map((x) => x[0]?.value)
+          .filter((x) => x)}
         // @ts-ignore
         getBindingsForCell={getBindingsForCell}
       />
     ),
-    [DataEditor, getBindingsForCell]
+    [DataEditor, getBindingsForCell, props.data]
   );
 
   const rootNode = React.useMemo(

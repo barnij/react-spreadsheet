@@ -131,6 +131,7 @@ export type DataEditorProps<Cell extends CellBase = CellBase> =
     onChange: (cell: Cell) => void;
     /** Callback to be called when edit mode should be exited */
     exitEditMode: () => void;
+    autocompleteList?: string[];
   };
 
 /** Type of the Spreadsheet DataEditor component */

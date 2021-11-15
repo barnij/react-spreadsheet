@@ -33,8 +33,9 @@
     "scheduler": ">=0.19.0"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.1.0",
     "@reduxjs/toolkit": "^1.6.1",
     "@types/array.prototype.flatmap": "^1.2.2",
     "array.prototype.flatmap": "^1.2.4",
