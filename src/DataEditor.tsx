@@ -104,7 +104,7 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
   if (column === INSTRUCTION_COL) {
     return autocomplete(INSTRUCTIONS);
   }
-  if (column === ARGUMENT_COL) {
+  if (column === ARGUMENT_COL && autocompleteList) {
     return autocomplete(autocompleteList ?? []);
   }
 
