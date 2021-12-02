@@ -470,20 +470,44 @@ const Spreadsheet = <CellType extends Types.CellBase>(
     ]
   );
 
-  const activeCellNode = React.useMemo(
-    () => (
-      <ActiveCell
-        // @ts-ignore
-        DataEditor={DataEditor}
-        valuesFromFirstColumn={props.data
-          .map((x) => x[0]?.value)
-          .filter((x) => x)}
-        // @ts-ignore
-        getBindingsForCell={getBindingsForCell}
-      />
-    ),
-    [DataEditor, getBindingsForCell, props.data]
-  );
+  const activeCellNode = React.useMemo(() => {
+    const isLabelArgument = (): boolean => {
+      const p = state.active;
+      const JUMPS = ["jump", "jzero", "jgtz"];
+      const INSTRUCTION_COL = 1;
+      const ARGUMENT_COL = 2;
+
+      if (!p || p.column !== ARGUMENT_COL) return false;
+
+      if (JUMPS.includes(state.data[p.row][INSTRUCTION_COL]?.value))
+        return true;
+      return false;
+    };
+
+    console.log(isLabelArgument());
+
+    if (isLabelArgument())
+      return (
+        <ActiveCell
+          // @ts-ignore
+          DataEditor={DataEditor}
+          valuesFromFirstColumn={props.data
+            .map((x) => x[0]?.value)
+            .filter((x) => x)}
+          // @ts-ignore
+          getBindingsForCell={getBindingsForCell}
+        />
+      );
+    else
+      return (
+        <ActiveCell
+          // @ts-ignore
+          DataEditor={DataEditor}
+          // @ts-ignore
+          getBindingsForCell={getBindingsForCell}
+        />
+      );
+  }, [DataEditor, getBindingsForCell, props.data, state.data, state.active]);
 
   const rootNode = React.useMemo(
     () => (

@@ -16,8 +16,7 @@ type Props = {
 
 const ActiveCell: React.FC<Props> = (props) => {
   const rootRef = React.useRef<HTMLDivElement>(null);
-  const { getBindingsForCell } = props;
-  const valuesFromFirstColumn = props.valuesFromFirstColumn ?? [];
+  const { getBindingsForCell, valuesFromFirstColumn } = props;
 
   const dispatch = useDispatch();
   const setCellData = React.useCallback(
