@@ -2,6 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import * as React from "react";
 import * as Types from "./types";
 import { moveCursorToEnd, selectInputValue } from "./util";
+import { COLUMN } from "./enums";
 
 /** The default Spreadsheet DataEditor component */
 const DataEditor: React.FC<Types.DataEditorProps> = ({ onChange, cell }) => {
@@ -98,13 +99,10 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
     </div>
   );
 
-  const INSTRUCTION_COL = 1;
-  const ARGUMENT_COL = 2;
-
-  if (column === INSTRUCTION_COL) {
+  if (column === COLUMN.INSTRUCTION) {
     return autocomplete(INSTRUCTIONS);
   }
-  if (column === ARGUMENT_COL && autocompleteList) {
+  if (column === COLUMN.ARGUMENT && autocompleteList) {
     return autocomplete(autocompleteList ?? []);
   }
 
