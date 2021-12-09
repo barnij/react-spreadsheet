@@ -38,6 +38,7 @@ import {
 import reducer, { INITIAL_STATE, hasKeyDownHandler } from "./reducer";
 import context from "./context";
 import "./Spreadsheet.css";
+import { COLUMN } from "./enums";
 
 /** The Spreadsheet component props */
 export type Props<CellType extends Types.CellBase> = {
@@ -474,17 +475,13 @@ const Spreadsheet = <CellType extends Types.CellBase>(
     const isLabelArgument = (): boolean => {
       const p = state.active;
       const JUMPS = ["jump", "jzero", "jgtz"];
-      const INSTRUCTION_COL = 1;
-      const ARGUMENT_COL = 2;
 
-      if (!p || p.column !== ARGUMENT_COL) return false;
+      if (!p || p.column !== COLUMN.ARGUMENT) return false;
 
-      if (JUMPS.includes(state.data[p.row][INSTRUCTION_COL]?.value))
+      if (JUMPS.includes(state.data[p.row][COLUMN.INSTRUCTION]?.value))
         return true;
       return false;
     };
-
-    console.log(isLabelArgument());
 
     if (isLabelArgument())
       return (
