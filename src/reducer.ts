@@ -333,6 +333,10 @@ const editKeyDownHandlers: KeyDownHandlers = {
 
 const editShiftKeyDownHandlers: KeyDownHandlers = {
   Tab: go(0, -1),
+  ArrowUp: keyDownHandlers.ArrowUp,
+  ArrowRight: keyDownHandlers.ArrowRight,
+  ArrowLeft: keyDownHandlers.ArrowLeft,
+  ArrowDown: keyDownHandlers.ArrowDown,
 };
 
 export const modifyEdge =
