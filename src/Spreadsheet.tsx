@@ -73,6 +73,11 @@ export type Props<CellType extends Types.CellBase> = {
    * Defaults to: `false`.
    */
   hideColumnIndicators?: boolean;
+  /**
+   * Set readonly prop for every Cell.
+   * Defaults to: `false`.
+   */
+  readOnly?: boolean;
   // Custom Components
   /** Component rendered above each column. */
   ColumnIndicator?: Types.ColumnIndicatorComponent;
@@ -483,28 +488,30 @@ const Spreadsheet = <CellType extends Types.CellBase>(
       return false;
     };
 
+    let valuesFromFirstColumn = undefined;
     if (isLabelArgument())
-      return (
-        <ActiveCell
-          // @ts-ignore
-          DataEditor={DataEditor}
-          valuesFromFirstColumn={props.data
-            .map((x) => x[0]?.value)
-            .filter((x) => x)}
-          // @ts-ignore
-          getBindingsForCell={getBindingsForCell}
-        />
-      );
-    else
-      return (
-        <ActiveCell
-          // @ts-ignore
-          DataEditor={DataEditor}
-          // @ts-ignore
-          getBindingsForCell={getBindingsForCell}
-        />
-      );
-  }, [DataEditor, getBindingsForCell, props.data, state.data, state.active]);
+      valuesFromFirstColumn = props.data
+        .map((x) => x[0]?.value)
+        .filter((x) => x);
+
+    return (
+      <ActiveCell
+        // @ts-ignore
+        DataEditor={DataEditor}
+        readOnly={props.readOnly}
+        valuesFromFirstColumn={valuesFromFirstColumn}
+        // @ts-ignore
+        getBindingsForCell={getBindingsForCell}
+      />
+    );
+  }, [
+    DataEditor,
+    getBindingsForCell,
+    props.data,
+    state.data,
+    state.active,
+    props.readOnly,
+  ]);
 
   const rootNode = React.useMemo(
     () => (

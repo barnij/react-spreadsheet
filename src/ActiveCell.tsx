@@ -11,12 +11,13 @@ import { getCellDimensions } from "./util";
 type Props = {
   DataEditor: Types.DataEditorComponent;
   valuesFromFirstColumn?: string[];
+  readOnly?: boolean;
   getBindingsForCell: Types.GetBindingsForCell<Types.CellBase>;
 };
 
 const ActiveCell: React.FC<Props> = (props) => {
   const rootRef = React.useRef<HTMLDivElement>(null);
-  const { getBindingsForCell, valuesFromFirstColumn } = props;
+  const { getBindingsForCell, valuesFromFirstColumn, readOnly } = props;
 
   const dispatch = useDispatch();
   const setCellData = React.useCallback(
@@ -106,7 +107,7 @@ const ActiveCell: React.FC<Props> = (props) => {
   });
 
   const DataEditor = (cell && cell.DataEditor) || props.DataEditor;
-  const readOnly = cell && cell.readOnly;
+  //const readOnly = cell && cell.readOnly;
 
   return hidden ? null : (
     <div
@@ -128,6 +129,7 @@ const ActiveCell: React.FC<Props> = (props) => {
           // @ts-ignore
           onChange={handleChange}
           exitEditMode={view}
+          readOnly={readOnly}
         />
       )}
     </div>

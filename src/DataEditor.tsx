@@ -57,6 +57,7 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
   onChange,
   cell,
   autocompleteList,
+  readOnly,
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -98,6 +99,13 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
       />
     </div>
   );
+
+  if (readOnly)
+    return (
+      <div className="Spreadsheet__cell-editor">
+        <span>{value}</span>
+      </div>
+    );
 
   if (column === COLUMN.INSTRUCTION) {
     return autocomplete(INSTRUCTIONS);
