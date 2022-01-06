@@ -1,6 +1,6 @@
 {
   "name": "@barnij/react-spreadsheet",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Simple, customizable yet performant spreadsheet for React",
   "author": "Bartosz Jaśkiewicz, Iddan Aaronsohn <mail@aniddan.com> (https://aniddan.com)",
   "keywords": [
