@@ -1,4 +1,9 @@
-import { Autocomplete, createTheme, TextField, ThemeProvider } from "@mui/material";
+import {
+  Autocomplete,
+  createTheme,
+  TextField,
+  ThemeProvider,
+} from "@mui/material";
 import * as React from "react";
 import * as Types from "./types";
 import { moveCursorToEnd, selectInputValue } from "./util";
@@ -63,7 +68,8 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      onChange({ ...cell, value: event.target.value });
+      const v = event.target.value.match(/\x7F/g) ? "" : event.target.value;
+      onChange({ ...cell, value: v });
     },
     [onChange, cell]
   );
@@ -76,7 +82,10 @@ export const DataEditorAutocomplete: React.FC<Types.DataEditorProps> = ({
 
   const value = cell?.value ?? "";
 
-  const theme = React.useMemo(() => createTheme({palette: {mode: 'dark'}}), []);
+  const theme = React.useMemo(
+    () => createTheme({ palette: { mode: "dark" } }),
+    []
+  );
 
   const autocomplete = (options: string[]) => (
     <div className="Spreadsheet__data-editor">
