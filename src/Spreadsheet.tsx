@@ -504,13 +504,13 @@ const Spreadsheet = <CellType extends Types.CellBase>(
         getBindingsForCell={getBindingsForCell}
       />
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     DataEditor,
     getBindingsForCell,
     props.data,
-    state.data,
-    state.active,
     props.readOnly,
+    state.active,
   ]);
 
   const rootNode = React.useMemo(
